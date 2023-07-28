@@ -1,8 +1,9 @@
 "use client";
 import "./../styles/global.css";
 import type { Metadata } from "next";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/header/NavBar";
 import { ThemeProvider } from "next-themes";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   icons: {
@@ -19,10 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="dark:bg-stone-900">
+      <body
+        className="dark:bg-stone-900 container"
+        suppressHydrationWarning={true}
+      >
         <ThemeProvider enableSystem={true} attribute="class">
           <NavBar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

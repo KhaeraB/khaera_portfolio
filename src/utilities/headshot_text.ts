@@ -5,18 +5,19 @@ interface Headshot {
   description_1: string;
   description_2: string;
   image: string;
+  gif: string;
 }
 
 const HeadshotText: Array<Headshot> = [
   {
-    title: 'Salut, Je suis Khaera',
-    job: 'Développeuse React, Fullstack ou FrontEnd',
-    job_2: 'le design UI/UX',
-    description_1:
-      ". Basée en région Parisienne. J'ai toujours été fascinée par l'intersection entre la technologie et",
+    title: "Moi c'est Khaera, Développeuse React",
+    job: "Pour moi être développeuse",
+    job_2: "une véritable passion",
+    description_1: " c'est pas seulement faire une série de lignes, c'est",
     description_2:
-      ". Dès mes premières expériences avec les interfaces utilisateur, j'ai réalisé l'importance de créer des expériences fluides et engageantes pour les utilisateurs.",
-    image: '/images/headshot_kb.jpg',
+      " qui me pousse à repousser les limites et à chercher constamment des solutions innovantes. Je suis prête à faire partie de vos projets.",
+    image: "/images/headshot_kb.jpg",
+    gif: "/images/techno.gif",
   },
 ];
 
