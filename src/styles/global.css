@@ -11,6 +11,13 @@
   justify-content: space-between;
 }
 
+main {
+  min-height: 46rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @layer utilities {
   .animation-delay-200 {
     animation-delay: 0.2s;
@@ -18,8 +25,4 @@
   .animation-delay-400 {
     animation-delay: 0.4s;
   }
-}
-
-.dot {
-  @apply w-80 h-80 my-12 mx-1 bg-gray-400 rounded-full;
 }
