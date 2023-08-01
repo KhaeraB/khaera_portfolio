@@ -2,14 +2,16 @@
 import React from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
+import { Link as Arrow } from "react-scroll";
 import { HiArrowDown } from "react-icons/hi";
-import HeadshotText from "../../utilities/headshot_text";
+import datas from "../../utilities/portefolio_text";
 import Link from "next/link";
+import { icons_style } from "@/utilities/icons";
 
 const HeroSection = () => {
   return (
     <section id="home">
-      {HeadshotText.map((item) => {
+      {datas.HeadshotText.map((item) => {
         return (
           <div
             key={item.title}
@@ -19,39 +21,39 @@ const HeroSection = () => {
               <Image
                 src={item.image}
                 alt="khaera Belkadi portrait"
-                width={300}
-                height={300}
+                width={250}
+                height={250}
                 className="rounded-full shadow-2xl"
               />
               <div className="flex flex-row justify-between mt-4 w-60">
                 <Image
                   src={item.mongoDB}
                   alt="khaera Belkadi portrait"
-                  width={45}
-                  height={45}
-                  className="rounded-full shadow-2xl animate-swing in-expo"
+                  width={icons_style.width}
+                  height={icons_style.height}
+                  className={icons_style.style}
                 />
                 <Image
                   src={item.express}
                   alt="khaera Belkadi portrait"
-                  width={45}
-                  height={45}
-                  className="rounded-full shadow-2xl animate-swing in-expo"
+                  width={icons_style.width}
+                  height={icons_style.height}
+                  className={icons_style.style}
                 />
                 <Image
                   src={item.react}
                   alt="khaera Belkadi portrait"
-                  width={45}
-                  height={45}
-                  className="rounded-full shadow-2xl animate-swing in-expo"
+                  width={icons_style.width}
+                  height={icons_style.height}
+                  className={icons_style.style}
                 />
                 <Image
                   src={item.node}
                   alt="khaera Belkadi portrait"
-                  width={45}
-                  height={45}
-                  className="rounded-full shadow-2xl animate-swing in-expo"
-                />{" "}
+                  width={icons_style.width}
+                  height={icons_style.height}
+                  className={icons_style.style}
+                />
                 {/* dot animate-swing in-expo */}
               </div>
             </div>
@@ -92,12 +94,18 @@ const HeroSection = () => {
                 >
                   Voir mes projets
                 </Link>
-                <Link
-                  href="/about"
+                <Arrow
+                  to="about"
+                  activeClass="active"
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
                   className="text-neutral-100 cursor-pointer font-semibold px-6 py-3 bg-teal-600 rounded shadow hover:bg-teal-700"
                 >
                   Mon parcours
-                </Link>
+                </Arrow>
+
                 <Link
                   href="/contact"
                   className="text-neutral-100 cursor-pointer font-semibold px-6 py-3 bg-teal-600 rounded shadow hover:bg-teal-700"
@@ -109,6 +117,18 @@ const HeroSection = () => {
           </div>
         );
       })}
+      <div className="flex flex-row justify-center mt-10">
+        <Arrow
+          to="about"
+          activeClass="active"
+          spy={true}
+          smooth={true}
+          offset={-100}
+          duration={500}
+        >
+          <HiArrowDown size={35} className="animate-bounce cursor-pointer" />
+        </Arrow>
+      </div>
     </section>
   );
 };

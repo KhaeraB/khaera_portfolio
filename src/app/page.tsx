@@ -1,5 +1,6 @@
 "use client";
 import HeroSection from "@/components/HeroSection/page";
+import AboutSection from "@/components/AboutSection/About";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,8 +13,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-3xl px-4 sm-px-6 md:max-w-5xl">
+    <main className="flex flex-col mt-20 md:mt-36 mx-auto max-w-3xl px-4 sm-px-6 md:max-w-5xl">
       <HeroSection />
+      <AboutSection />
     </main>
   );
 }
