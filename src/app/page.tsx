@@ -1,6 +1,6 @@
 "use client";
-import HeroSection from "@/components/HeroSection/page";
-import AboutSection from "@/components/AboutSection/About";
+import HeroSection from "@/components/heroSection/page";
+import AboutSection from "@/components/aboutSection/About";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

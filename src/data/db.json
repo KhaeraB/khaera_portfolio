@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "projects",
+    "breadcrumbs": [
+      {
+        "text": "Home",
+        "url": "/"
+      },
+      {
+        "text": "about",
+        "url": "/about"
+      },
+      {
+        "text": "Projets",
+        "url": "/projets"
+      },
+      {
+        "text": "Python",
+        "url": "/course/python"
+      }
+    ]
+  }
+]
