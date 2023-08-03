@@ -15,7 +15,7 @@ const AboutSection = () => {
               </h1>
               <div className="flex flex-col space-y-10 items-stretch justify-center align-top md:space-x-10 md:space-y-0 md:p-4 md:flex-row md:text-left">
                 <div className="md:w-1/2 ">
-                  <h2 className="text-center text-2xl p-1 bg-teal-500 font-bold mb-6 md:text-left">
+                  <h2 className="text-center text-2xl p-1 font-bold mb-6 md:text-left">
                     {item.subTitle}
                   </h2>
                   <p>
@@ -49,7 +49,7 @@ const AboutSection = () => {
                     alt="portrait de khaera"
                     width={500}
                     height={500}
-                    className="hidden md:block md:relative md:bottom-4  md:z-0"
+                    className="blur-sm hover:blur-none hidden md:block md:relative md:bottom-4  md:z-0"
                   />
                 </div>
               </div>

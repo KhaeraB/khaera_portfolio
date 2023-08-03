@@ -17,10 +17,10 @@ const HeroSection = () => {
             key={item.title}
             className=" flex flex-col text-center items-center justify-center md:flex-row md:space-x-4 md:text-left "
           >
-            <div className="md:mt-2 md:w-1/2  flex flex-col items-center justify-center">
+            <div className="md:mt-2 md:w-1/2 flex flex-col items-center justify-center">
               <Image
                 src={item.image}
-                alt="khaera Belkadi portrait"
+                alt="Khaera Belkadi portrait"
                 width={250}
                 height={250}
                 className="rounded-full shadow-2xl"
