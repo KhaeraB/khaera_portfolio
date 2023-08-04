@@ -9,8 +9,8 @@ export const MENU_LIST: Array<NavItems> = [
     page: "/",
   },
   {
-    label: "Projets",
-    page: "/projects",
+    label: "Portfolio",
+    page: "/portfolio",
   },
   {
     label: "Contactez-moi",
