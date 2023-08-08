@@ -1,37 +1,33 @@
-import Link from "next/link";
-import { ReactNode } from "react";
-// defining the Props
-export type CrumbItem = {
-  label: ReactNode; // e.g., Python
-  path: string; // e.g., /development/programming-languages/python
-};
-export type BreadcrumbsProps = {
-  items: CrumbItem[];
-};
-const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
+import { Children, ReactNode } from "react";
+import { Fragment } from "react";
+
+interface BreadcrumbProps {
+  children: ReactNode;
+}
+
+const Breadcrumb = ({ children }: BreadcrumbProps) => {
+  const childrenArray = Children.toArray(children);
+
+  const childrenWtihSeperator = childrenArray.map((child, index) => {
+    if (index !== childrenArray.length - 1) {
+      return (
+        <Fragment key={index}>
+          {child}
+          <span className="text-gray-400 text-[16px] font-medium">{">"}</span>
+        </Fragment>
+      );
+    }
+    return child;
+  });
+
   return (
-    <div className="flex gap-2 items-start">
-      {items.map((crumb, i) => {
-        const isLastItem = i === items.length - 1;
-        if (!isLastItem) {
-          return (
-            <>
-              <Link
-                href={crumb.path}
-                key={i}
-                className="text-indigo-500 hover:text-indigo-400 hover:underline"
-              >
-                {crumb.label}
-              </Link>
-              {/* separator */}
-              <span> / </span>
-            </>
-          );
-        } else {
-          return crumb.label;
-        }
-      })}
-    </div>
+    <nav
+      className=" mt-16 md:mt-28 mx-2 flex flex-row-reverse"
+      aria-label="breadcrumb"
+    >
+      <ol className="flex items-center space-x-1">{childrenWtihSeperator}</ol>
+    </nav>
   );
 };
-export default Breadcrumbs;
+
+export default Breadcrumb;

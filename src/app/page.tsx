@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex flex-col mt-20 md:mt-36 mx-auto max-w-3xl px-4 sm-px-6 md:max-w-5xl">
+    <main className="flex flex-col mt-7 md:mt-12 mx-auto max-w-3xl px-4 sm-px-6 md:max-w-5xl">
       <HeroSection />
       <AboutSection />
     </main>

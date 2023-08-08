@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { useParams, usePathname } from "next/navigation";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
-import { AiOutlineHome } from "react-icons/ai";
-import { TitleProject } from "@/fonts/KbFonts";
-import datas from "@/utilities/portefolio_text";
 import { ButtonProjet } from "@/components/button/Button";
 import { Metadata } from "next";
 import { FiGithub } from "react-icons/fi";
+import { AiOutlineHome } from "react-icons/ai";
+import { TitleProject } from "@/fonts/KbFonts";
+import datas from "@/utilities/portefolio_text";
 
 export const metadata: Metadata = {
   icons: {
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
   title: "Khaera_blk", //la variable du titre depuis la data
   description: "Portfolio of my projects",
 };
+
 // const [windowSize, setWindowSize] = useState([window.innerWidth]);
 
 // const breakpoint = 620;
@@ -34,32 +37,13 @@ export const metadata: Metadata = {
 //   window.addEventListener("resize", (buttonInnerWidth = result));
 // }, []);
 const Project = () => {
+  const params = usePathname().split("/");
+  console.log(params);
+
   return (
-    <div className="flex flex-col px-5 mt-20 md:mt-32 md:flex-col md:space-x-4 md:text-left ">
+    <div className="flex flex-col px-5 mt-8  md:flex-col md:space-x-4 md:text-left ">
       {/* <div className="w-full mt-16 md:mt-28"> */}
-      {/* <div className="p-2 text-xs">
-          {" "}
-          <Breadcrumbs
-            items={[
-              {
-                label: <AiOutlineHome size={15} />,
-                path: "/",
-              },
-              {
-                label: "Development",
-                path: "/courses/development",
-              },
-              {
-                label: "Programming Languages",
-                path: "/courses/development/programming-languages",
-              },
-              {
-                label: "Python",
-                path: "/topic/python",
-              },
-            ]}
-          />
-        </div> */}
+
       {/* <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
               <a href="https://github.com/KhaeraB" className="m-0">
                 <FiGithub size={20} />

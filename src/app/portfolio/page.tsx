@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const Projects = () => {
   return (
-    <div className="flex flex-col justify-center py-16 md:mt-10  mx-auto   md:space-x-4 md:text-left">
+    <div className="flex flex-col justify-center   mx-auto   md:space-x-4 md:text-left">
       <h1
         className={`${logoFont.className}  ${styleGradiant} text-left bg-clip-text text-transparent text-4xl md:text-8xl my-2 `}
       >
@@ -51,7 +51,7 @@ const Projects = () => {
               </span>{" "}
             </p>
           </div>
-          <Button url="/portfolio/category" text="Voir les projects" />
+          <Button url="/portfolio/websites" text="Voir les projects" />
         </div>
         <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
           <div className="relative">
@@ -80,7 +80,7 @@ const Projects = () => {
               </span>{" "}
             </p>
           </div>
-          <Button url="/portfolio/category" text="Voir les projects" />
+          <Button url="/portfolio/design" text="Voir les projects" />
         </div>
 
         <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
@@ -108,7 +108,7 @@ const Projects = () => {
               et <span className="text-indigo-600 font-bold">PERSONNELS </span>{" "}
             </p>
           </div>
-          <Button url="/portfolio/category" text="Voir les projects" />
+          <Button url="/portfolio/illustrations" text="Voir les projects" />
         </div>
       </div>
     </div>
