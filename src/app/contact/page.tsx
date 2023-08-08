@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 const Contact = () => {
   return (
-    <div className="mt-20 md:mt-36 ">
+    <div className="mt-5 md:mt-18 ">
       <h1 className="text-center font-bold text-4xl">
         Contactez-moi
         <hr className="w-6 h-1 mx-auto my-4 bg-teal-500 border-0 rounded"></hr>
