@@ -5,6 +5,7 @@ import { FiGithub } from "react-icons/fi";
 import { logoFont } from "@/fonts/KbFonts";
 import Link from "next/link";
 import { Button, styleGradiant } from "@/components/button/Button";
+import ProjectCard from "@/components/projectCard/page";
 
 export const metadata: Metadata = {
   icons: {
@@ -23,36 +24,17 @@ const Projects = () => {
         Catégories
       </h1>
       <p>Choisisez une catégories</p>
+
       <div className="flex flex-col text-center items-center justify-center  mx-2 md:flex-row md:space-x-4 md:text-left">
-        <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
-          <div className="relative">
-            <Image
-              className="w-full h-72 object-cover  bg-slate-300 "
-              src="/images/workHard.jpg"
-              width={300}
-              height={400}
-              alt="Sunset in the mountains"
-            />
-            <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
-            <div className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-              Websites
-            </div>
-          </div>
-          <div className="px-6 py-4 dark:bg-stone-800">
-            <h5 className="font-bold text-xl mb-2">Mes projets de sites</h5>
-            <p>
-              Retrouvez les projets avec les{" "}
-              <span className="text-indigo-600 font-bold">
-                COMPETENCES OPERATIONNELLES
-              </span>{" "}
-              et{" "}
-              <span className="text-indigo-600 font-bold">
-                CONNAISANCES TECHNIQUES{" "}
-              </span>{" "}
-            </p>
-          </div>
-          <Button url="/portfolio/websites" text="Voir les projects" />
-        </div>
+        <ProjectCard
+          image="/images/workHard.jpg"
+          alt="Websites image"
+          category="Websites"
+          title="Mes projets de sites"
+          description="Retrouvez les projets avec les COMPETENCES OPERATIONNELLES et CONNAISANCES TECHNIQUES"
+          buttonUrl="/portfolio/websites"
+          buttonText="Voir les projects"
+        />
         <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
           <div className="relative">
             <Image

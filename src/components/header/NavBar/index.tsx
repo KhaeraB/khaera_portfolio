@@ -1,12 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { logoFont } from "../../../fonts/KbFonts";
 import Menu from "../Menu";
 import Link from "next/link";
 
+const initialState = { isOpen: false };
+
+const navbarReducer = (
+  state: { isOpen: boolean },
+  action: { type: string }
+) => {
+  switch (action.type) {
+    case "TOGGLE_NAVBAR":
+      return { isOpen: !state.isOpen };
+    default:
+      return state;
+  }
+};
+
 const NavBar = () => {
-  const [navbar, setNavbar] = useState(false);
+  const [navbar, dispatch] = useReducer(navbarReducer, initialState);
 
   return (
     <header className="w-full mx-auto  px-4 sm:px-2 fixed top-0 z-50 shadow bg-white dark:bg-stone-900 dark:border-b dark:border-stone-600">
@@ -21,13 +35,20 @@ const NavBar = () => {
               </h2>
             </div>
             <div className="md:hidden">
-              <button onClick={() => setNavbar(!navbar)}>
-                {navbar ? <IoMdClose size={30} /> : <IoMdMenu size={30} />}
+              <button onClick={() => dispatch({ type: "TOGGLE_NAVBAR" })}>
+                {navbar.isOpen ? (
+                  <IoMdClose size={30} />
+                ) : (
+                  <IoMdMenu size={30} />
+                )}
               </button>
             </div>
           </div>
         </div>
-        <Menu navbar={navbar} setNavbar={setNavbar} />
+        <Menu
+          navbar={navbar.isOpen}
+          setNavbar={() => dispatch({ type: "TOGGLE_NAVBAR" })}
+        />
       </div>
     </header>
   );

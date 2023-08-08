@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 //   // eslint-disable-next-line react-hooks/exhaustive-deps
 //   window.addEventListener("resize", (buttonInnerWidth = result));
 // }, []);
-const Project = () => {
+const Projects = () => {
   const pathname = usePathname();
   let pathArray = pathname.split("/");
   pathArray.shift();
@@ -97,4 +97,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default Projects;
