@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { logoFont } from "../../../fonts/KbFonts";
 import Menu from "../Menu";
+import Link from "next/link";
 
 const NavBar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -16,7 +17,7 @@ const NavBar = () => {
               <h2
                 className={`${logoFont.className} font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-indigo-300 from-10% via-sky-300 via-30% to-emerald-300 to-90% dark:bg-white`}
               >
-                Khaera_blk
+                <Link href="/">Khaera_blk</Link>
               </h2>
             </div>
             <div className="md:hidden">
