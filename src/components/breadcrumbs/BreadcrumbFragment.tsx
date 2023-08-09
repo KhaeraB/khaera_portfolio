@@ -5,7 +5,7 @@ interface BreadcrumbProps {
   children: ReactNode;
 }
 
-const Breadcrumb = ({ children }: BreadcrumbProps) => {
+const BreadcrumbFragment = ({ children }: BreadcrumbProps) => {
   const childrenArray = Children.toArray(children);
 
   const childrenWtihSeperator = childrenArray.map((child, index) => {
@@ -30,4 +30,4 @@ const Breadcrumb = ({ children }: BreadcrumbProps) => {
   );
 };
 
-export default Breadcrumb;
+export default BreadcrumbFragment;

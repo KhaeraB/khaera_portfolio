@@ -1,10 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import { Metadata } from "next";
-import { FiGithub } from "react-icons/fi";
 import { logoFont } from "@/fonts/KbFonts";
-import Link from "next/link";
-import { Button, styleGradiant } from "@/components/button/Button";
+import { styleGradiant } from "@/components/button/Button";
 import ProjectCard from "@/components/projectCard/page";
 
 export const metadata: Metadata = {
@@ -29,69 +26,33 @@ const Projects = () => {
         <ProjectCard
           image="/images/workHard.jpg"
           alt="Websites image"
+          key="/images/workHard.jpg"
           category="Websites"
           title="Mes projets de sites"
           description="Retrouvez les projets avec les COMPETENCES OPERATIONNELLES et CONNAISANCES TECHNIQUES"
           buttonUrl="/portfolio/websites"
           buttonText="Voir les projects"
         />
-        <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
-          <div className="relative">
-            <Image
-              className="w-full h-72 object-cover bg-top bg-slate-300 "
-              src="/images/Learn_Home.jpg"
-              width={300}
-              height={400}
-              alt="Sunset in the mountains"
-            />
-            <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
-            <div className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-              UI/UX Design
-            </div>
-          </div>
-          <div className="px-6 py-4 dark:bg-stone-800">
-            <h5 className="font-bold text-xl mb-2">Mes projets de sites</h5>
-            <p>
-              Retrouvez les créations de design app/mobile{" "}
-              <span className="text-indigo-600 font-bold">
-                LOGICIELS UTILIES
-              </span>{" "}
-              et{" "}
-              <span className="text-indigo-600 font-bold">
-                CONNAISSANCES TECHNIQUES{" "}
-              </span>{" "}
-            </p>
-          </div>
-          <Button url="/portfolio/design" text="Voir les projects" />
-        </div>
-
-        <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
-          <div className="relative">
-            <Image
-              className="w-full h-72 object-cover  bg-slate-300 "
-              src="/images/intheskyline.jpg"
-              width={300}
-              height={400}
-              alt="Sunset in the mountains"
-            />
-            <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
-            <div className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-              Illustrations
-            </div>
-          </div>
-          <div className="px-6 py-4 dark:bg-stone-800">
-            <h5 className="font-bold text-xl mb-2">Mes illustrations</h5>
-            <p>
-              {"La création d'illustrations via Adobe ou Procreate"}
-              retrouvez les{" "}
-              <span className="text-indigo-600 font-bold">
-                PROJETS PROFESSIONNELS
-              </span>{" "}
-              et <span className="text-indigo-600 font-bold">PERSONNELS </span>{" "}
-            </p>
-          </div>
-          <Button url="/portfolio/illustrations" text="Voir les projects" />
-        </div>
+        <ProjectCard
+          image="/images/Learn_Home.jpg"
+          alt="Design image"
+          key="/images/Learn_Home.jpg"
+          category="UI/UX Design"
+          title="Mes projets de design UI UX"
+          description=" Retrouvez les créations de design app/mobile LOGICIELS UTILIES et CONNAISSANCES TECHNIQUES"
+          buttonUrl="/portfolio/design"
+          buttonText="Voir les projects"
+        />
+        <ProjectCard
+          image="/images/intheskyline.jpg"
+          alt="Illustration image"
+          key="/images/intheskyline.jpg"
+          category="Illustrations"
+          title="Mes Illustrations"
+          description="La création d'illustrations via Adobe ou Procreateretrouvez les PROJETS PROFESSIONNELS et PERSONNELS"
+          buttonUrl="/portfolio/illustrations"
+          buttonText="Voir les projects"
+        />
       </div>
     </div>
   );

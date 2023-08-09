@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-import { useTheme } from "next-themes";
-import { RiMoonFill, RiSunLine } from "react-icons/ri";
 import Link from "next/link";
 import { MENU_LIST } from "@/utilities/roots_navlink";
+import DarkModeToggle from "@/components/darkmodeToggle/DarkModeToggle";
 
 type Props = {
   navbar: boolean;
@@ -11,9 +10,6 @@ type Props = {
 };
 
 const Menu = ({ navbar, setNavbar }: Props) => {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
-
   return (
     <div>
       <div
@@ -22,21 +18,7 @@ const Menu = ({ navbar, setNavbar }: Props) => {
         }`}
       >
         <div className="items-center justify-center space-y-8 md:flex md:space-x-4 md:space-y-0">
-          {currentTheme === "dark" ? (
-            <button
-              onClick={() => setTheme("light")}
-              className="bg-slate-100 p-2 rounded-xl"
-            >
-              <RiSunLine size={15} color="black" />
-            </button>
-          ) : (
-            <button
-              onClick={() => setTheme("dark")}
-              className="bg-slate-100 p-2 rounded-xl"
-            >
-              <RiMoonFill size={15} />
-            </button>
-          )}
+          <DarkModeToggle />
           {MENU_LIST.map((item, id) => {
             return (
               <Link

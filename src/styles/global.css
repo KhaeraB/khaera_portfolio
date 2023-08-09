@@ -25,4 +25,13 @@ main {
   .animation-delay-400 {
     animation-delay: 0.4s;
   }
+  .item:nth-child(2n + 1) {
+    flex-direction: row-reverse;
+  }
+}
+
+@layer base {
+  body {
+    @apply dark:bg-gray-800 bg-white transition-all ease-in-out duration-200;
+  }
 }

@@ -7,7 +7,8 @@ import Footer from "@/components/footer/Footer";
 import "../styles/global.css";
 import BreadcrumbItem from "@/components/breadcrumbs/BreadcrumbItem";
 import { usePathname } from "next/navigation";
-import Breadcrumb from "@/components/breadcrumbs/breadcrumbs";
+import Breadcrumb from "@/components/breadcrumbs/BreadcrumbFragment";
+import { BreadcrumbContext } from "../components/breadcrumbs/Breadcrumb";
 
 export const metadata: Metadata = {
   icons: {
@@ -28,28 +29,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItemInfo[]>([]);
-
-  useEffect(() => {
-    const pathWithoutQuery = pathname.split("?")[0];
-    let pathArray = pathWithoutQuery.split("/");
-    pathArray.shift();
-
-    pathArray = pathArray.filter((path) => path !== "");
-
-    const breadcrumbs = pathArray.map((path, index) => {
-      const href = "/" + pathArray.slice(0, index + 1).join("/");
-      return {
-        href,
-        label: path.charAt(0).toUpperCase() + path.slice(1),
-        isCurrent: index === pathArray.length - 1,
-      };
-    });
-
-    setBreadcrumbs(breadcrumbs);
-  }, [pathname]);
-
   return (
     <html lang="en">
       <body
@@ -58,20 +37,7 @@ export default function RootLayout({
       >
         <ThemeProvider enableSystem={true} attribute="class">
           <NavBar />
-          <Breadcrumb>
-            <BreadcrumbItem isCurrent={pathname === "/"} href="/">
-              Accueil
-            </BreadcrumbItem>
-            {breadcrumbs.map((breadcrumb) => (
-              <BreadcrumbItem
-                key={breadcrumb.href}
-                href={breadcrumb.href}
-                isCurrent={breadcrumb.isCurrent}
-              >
-                {breadcrumb.label}
-              </BreadcrumbItem>
-            ))}
-          </Breadcrumb>
+          <BreadcrumbContext />
           {children}
           <Footer />
         </ThemeProvider>
