@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Metadata } from "next";
-import { logoFont } from "@/fonts/KbFonts";
-import { styleGradiant } from "@/components/button/Button";
 import ProjectCard from "@/components/projectCard/page";
 import { getData } from "@/utils/data/api";
 
@@ -26,14 +24,14 @@ export const metadata: Metadata = {
 const Projects = () => {
   const [data, setData] = useState<Project[]>([]);
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
         const projectsData = await getData();
         setData(projectsData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    }
+    };
 
     fetchData();
   }, []);
@@ -50,7 +48,7 @@ const Projects = () => {
             category={item.category}
             title={item.title}
             description={item.desc}
-            buttonUrl={`/portfolio/` + item.title}
+            buttonUrl={`/portfolio/${encodeURIComponent(item._id)}`}
             buttonText="Voir les projects"
           />
         ))}
