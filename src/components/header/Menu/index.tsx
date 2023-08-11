@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { MENU_LIST } from "@/utilities/roots_navlink";
+import { MENU_LIST } from "@/utils/roots_navlink";
 import DarkModeToggle from "@/components/darkmodeToggle/DarkModeToggle";
 
 type Props = {
