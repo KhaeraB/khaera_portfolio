@@ -5,9 +5,6 @@ import NavBar from "../components/header/NavBar";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/footer/Footer";
 import "../styles/global.css";
-import BreadcrumbItem from "@/components/breadcrumbs/BreadcrumbItem";
-import { usePathname } from "next/navigation";
-import Breadcrumb from "@/components/breadcrumbs/BreadcrumbFragment";
 import { BreadcrumbContext } from "../components/breadcrumbs/Breadcrumb";
 
 export const metadata: Metadata = {

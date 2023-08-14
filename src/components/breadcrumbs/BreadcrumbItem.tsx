@@ -21,6 +21,7 @@ const BreadcrumbItem = ({
         <Link
           href={href}
           passHref
+          key={href}
           className={isCurrent ? "hidden" : ""}
           aria-current={isCurrent ? "page" : "false"}
         >

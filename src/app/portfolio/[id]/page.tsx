@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { notFound, usePathname } from "next/navigation";
+import { notFound } from "next/navigation";
 import { ButtonProjet } from "@/components/button/Button";
-import { GetStaticPropsContext } from "next";
 import { FiGithub } from "react-icons/fi";
 import { IWork } from "@/models/Work";
 import Link from "next/link";
@@ -16,7 +15,7 @@ interface Project {
   siteurl: string;
 }
 
-async function getData(_id: string) {
+async function getDataId(_id: string) {
   const res = await fetch(`http://localhost:3000/api/posts/${_id}`, {
     cache: "no-store",
   });
@@ -29,7 +28,7 @@ async function getData(_id: string) {
 }
 
 export async function generateMetadata({ params }: { params: IWork }) {
-  const post = await getData(params.id);
+  const post = await getDataId(params.id);
 
   return {
     title: post.title,
@@ -43,7 +42,7 @@ const ProjectPage = async ({ params }: { params: IWork }) => {
     return <div>No project data available.</div>;
   }
 
-  const data = await getData(params.id);
+  const data = await getDataId(params.id);
   return (
     <div className="flex flex-col px-5 mt-8 justify-center md:space-x-4 md:text-left ">
       <div

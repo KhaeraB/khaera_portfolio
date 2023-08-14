@@ -11,8 +11,8 @@ export const GET = async (
   try {
     await connect();
 
-    const post = await Work.findById(id);
-    return new NextResponse(JSON.stringify(post), { status: 200 });
+    const work = await Work.findById(id);
+    return new NextResponse(JSON.stringify(work), { status: 200 });
   } catch (err) {
     return new NextResponse("Database Error", { status: 500 });
   }
