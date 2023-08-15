@@ -1,4 +1,4 @@
-interface NavItems {
+export interface NavItems {
   label: string;
   page: string;
 }

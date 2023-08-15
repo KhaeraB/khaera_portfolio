@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { ButtonProjet } from "@/components/button/Button";
 import { FiGithub } from "react-icons/fi";
 import { IWork } from "@/models/Work";
 import Link from "next/link";
-
-interface Project {
-  _id: string;
-  title: string;
-  desc: string;
-  image: string;
-  giturl: string;
-  siteurl: string;
-}
-
-async function getDataId(_id: string) {
-  const res = await fetch(`http://localhost:3000/api/posts/${_id}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    return notFound();
-  }
-
-  return res.json();
-}
+import { getDataId } from "@/utils/data/api";
 
 export async function generateMetadata({ params }: { params: IWork }) {
   const post = await getDataId(params.id);

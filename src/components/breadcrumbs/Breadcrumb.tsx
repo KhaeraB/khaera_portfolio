@@ -14,7 +14,6 @@ interface BreadcrumbItemInfo {
 export const BreadcrumbContext = () => {
   const pathname = usePathname();
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItemInfo[]>([]);
-  const [metaData, setMetaData] = useState({});
   const home = pathname === "/";
   const [data, setData] = useState<Project[]>([]);
 
@@ -33,12 +32,6 @@ export const BreadcrumbContext = () => {
         isCurrent: index === pathArray.length - 1,
       };
     });
-    const generateMetadata = pathArray.map((path, index) => {
-      return {
-        title: path.charAt(0).toUpperCase() + path.slice(1),
-        description: path,
-      };
-    });
 
     const fetchData = async () => {
       try {
@@ -50,7 +43,6 @@ export const BreadcrumbContext = () => {
     };
 
     fetchData();
-    setMetaData(generateMetadata);
     setBreadcrumbs(breadcrumbs);
   }, [pathname]);
   return (

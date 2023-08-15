@@ -89,10 +89,10 @@ const HeroSection = () => {
               </p>
               <div className="flex flex-col justify-between space-y-3 flex-wrap md:space-y-0 md:flex-row md:flex-nowrap">
                 <Link
-                  href="/projects"
+                  href="/portfolio"
                   className="text-neutral-100 cursor-pointer font-semibold px-6 py-3 bg-teal-600 rounded shadow hover:bg-teal-700"
                 >
-                  Voir mes projets
+                  Voir mon travail
                 </Link>
                 <Arrow
                   to="about"

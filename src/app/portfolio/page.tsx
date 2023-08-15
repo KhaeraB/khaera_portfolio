@@ -14,10 +14,7 @@ export interface Project {
   siteurl: string;
 }
 export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon.ico",
-  },
-  title: "Khaera_blk",
+  title: "Portefolio",
   description: "Portfolio of my projects",
 };
 
@@ -35,7 +32,6 @@ const Projects = () => {
 
     fetchData();
   }, []);
-
   return (
     <div className="flex flex-col justify-center   mx-auto   md:space-x-4 md:text-left">
       <p>Choisisez un projet</p>

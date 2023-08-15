@@ -8,7 +8,7 @@ const AboutSection = () => {
       {datas.Background.map((item) => {
         return (
           <>
-            <div className="my-12 pb-5 md:pt-16">
+            <div className="my-12 pb-5 md:pt-16" key={item.title}>
               <h1 className="text-center font-bold text-4xl">
                 {item.title}
                 <hr className="w-6 h-1 mx-auto my-4 bg-teal-500 border-0 rounded"></hr>
