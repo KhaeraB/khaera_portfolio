@@ -9,10 +9,17 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_SECRET ?? "",
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_ID ?? "",
+      clientSecret: process.env.GOOGLE_SECRET ?? "",
     }),
   ],
+  pages: {
+    signIn: "api/auth/signin",
+    signOut: "api/auth/signout",
+    error: "api/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "api/auth/verify-request", // (used for check email message)
+    newUser: "api/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
 });
 
 export { handler as GET, handler as POST };
