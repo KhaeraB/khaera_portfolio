@@ -24,7 +24,7 @@ export const ButtonProjet = ({ text, url }: Props) => {
   return (
     <Link
       href={url}
-      className="flex justify-center w-1/3 space-y-3 mt-2 flex-wrap md:space-y-0 md:flex-row rounded md:flex-nowrap text-neutral-100 cursor-pointer font-semibold px-6 py-3 bg-teal-600  hover:bg-teal-700"
+      className="w-1/3 space-y-3 mt-2 flex-wrap md:space-y-0 md:flex-row rounded md:flex-nowrap text-neutral-100 cursor-pointer font-semibold px-6 py-3 bg-teal-600  hover:bg-teal-700"
     >
       {text}
     </Link>

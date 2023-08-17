@@ -1,5 +1,3 @@
-import { styleGradiant } from "@/components/button/Button";
-import { logoFont } from "@/fonts/KbFonts";
 import React, { ReactNode } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {

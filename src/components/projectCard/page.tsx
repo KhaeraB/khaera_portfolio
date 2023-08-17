@@ -10,6 +10,7 @@ interface PropsCard {
   description: string;
   buttonText: string;
   buttonUrl: string;
+  skills: [];
 }
 const ProjectCard: React.FC<PropsCard> = ({
   image,
@@ -19,6 +20,7 @@ const ProjectCard: React.FC<PropsCard> = ({
   description,
   buttonText,
   buttonUrl,
+  skills,
 }) => {
   return (
     <div className="max-w-sm mt-5 rounded overflow-hidden shadow-lg ">
@@ -39,6 +41,18 @@ const ProjectCard: React.FC<PropsCard> = ({
       <div className="px-6 py-4 dark:bg-stone-800">
         <h5 className="font-bold text-xl mb-2">{title}</h5>
         <p>{description}</p>
+      </div>
+      <div className="flex flex-wrap flex-row justify-center m-2 z-10 md:justify-center">
+        {skills.map((item: string, idx: number) => {
+          return (
+            <p
+              key={idx}
+              className="bg-gray-200 px-3 py-1 mr-2 mt-2 text-gray-500 rounded font-semibold"
+            >
+              {item}
+            </p>
+          );
+        })}
       </div>
       <Button url={buttonUrl} text={buttonText} />
     </div>

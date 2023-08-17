@@ -1,5 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Contactez-moi pour un projet",
+};
+
 const Contact = () => {
   return (
     <div className="mt-5 md:mt-18 ">

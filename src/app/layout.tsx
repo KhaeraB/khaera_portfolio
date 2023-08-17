@@ -1,26 +1,15 @@
-"use client";
 import React from "react";
 import { Metadata } from "next";
-import NavBar from "../components/header/NavBar";
-import { ThemeProvider } from "next-themes";
-import Footer from "@/components/footer/Footer";
-import "../styles/global.css";
-import { BreadcrumbContext } from "../components/breadcrumbs/Breadcrumb";
-import Head from "next/head";
-import { usePathname } from "next/navigation";
+import { LayoutProps } from "../../.next/types/app/layout";
+import RootLayout from "../components/rootLayout/RootLayout";
 
 export const metadata: Metadata = {
-  title: "Sling Academy",
-  description:
-    "This is a meta description. Welcome to slingacademy.com. Happy coding and have a nice day",
+  title: "Khaera_blk",
+  description: "Portfolio of my projects",
 };
 
 console.log(metadata);
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: LayoutProps) {
   // const pathname = usePathname();
   // const pathParts = pathname.split("/").filter(Boolean);
   // const pageTitle =
@@ -33,12 +22,7 @@ export default function RootLayout({
         className="dark:bg-stone-900 container"
         suppressHydrationWarning={true}
       >
-        <ThemeProvider enableSystem={true} attribute="class">
-          <NavBar />
-          <BreadcrumbContext />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <RootLayout>{children}</RootLayout>
       </body>
     </html>
   );
