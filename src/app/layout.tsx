@@ -4,10 +4,11 @@ import { LayoutProps } from "../../.next/types/app/layout";
 import RootLayout from "../components/rootLayout/RootLayout";
 
 export const metadata: Metadata = {
-  title: "Khaera_blk - Accueil ",
+  title: "Khaera_blk",
   description: "Portfolio of my projects",
 };
 
+console.log(metadata);
 export default function Layout({ children }: LayoutProps) {
   // const pathname = usePathname();
   // const pathParts = pathname.split("/").filter(Boolean);
