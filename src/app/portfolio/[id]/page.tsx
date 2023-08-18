@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: IWork }) {
   const post = await getDataId(params.id);
 
   return {
-    title: post.title,
+    title: "Khaera_blk - " + post.title,
     description: post.desc,
   };
 }

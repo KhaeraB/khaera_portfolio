@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Khaera-blk - Contact",
   description: "Contactez-moi pour un projet",
 };
 

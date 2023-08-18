@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import PortfolioPage from "@/components/portfolioPage/portfolioPage";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Khaera_blk - Portfolio",
   description: "Portfolio of my projects",
 };
 

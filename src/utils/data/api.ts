@@ -1,5 +1,3 @@
-import { Project } from "@/app/portfolio/page";
-
 export const getData = async () => {
   const res = await fetch("http://localhost:3000/api/works", {
     cache: "no-store",
