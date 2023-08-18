@@ -1,5 +1,12 @@
+"use client";
+import OAuthComponent from "@/components/OauthComponent/OauthComponenet";
 import React from "react";
 
-export const Login = () => {
-  return <div>Login</div>;
+const page = () => {
+  return (
+    <div className="flex flex-row justify-around">
+      <OAuthComponent company="Github" />
+      <OAuthComponent company="Google" />
+    </div>
+  );
 };
