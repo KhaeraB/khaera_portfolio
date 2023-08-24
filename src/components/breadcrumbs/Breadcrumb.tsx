@@ -3,7 +3,7 @@ import BreadcrumbsFragment from "@/components/breadcrumbs/BreadcrumbFragment";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getData } from "@/utils/data/api";
-import { Project } from "@/app/portfolio/page";
+import { Project } from "../portfolioPage/portfolioPage";
 
 interface BreadcrumbItemInfo {
   href: string;

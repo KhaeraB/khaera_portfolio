@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
-import { LayoutProps } from "../../.next/types/app/layout";
 import RootLayout from "../components/rootLayout/RootLayout";
+import { LayoutProps } from "@/types/LayoutProps";
 
 export const metadata: Metadata = {
   title: "Khaera_blk - Accueil",
