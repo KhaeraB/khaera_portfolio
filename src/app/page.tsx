@@ -1,5 +1,6 @@
-import HeroSection from "@/components/heroSection/page";
 import AboutSection from "@/components/aboutSection/About";
+import HeroSection from "@/components/heroSection/page";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
