@@ -1,29 +1,20 @@
-"use client";
-import "./../styles/global.css";
-import type { Metadata } from "next";
-import NavBar from "../components/NavBar";
-import { ThemeProvider } from "next-themes";
+import React from "react";
+import { Metadata } from "next";
+import RootLayout from "../components/rootLayout/RootLayout";
+import { LayoutProps } from "@/types/LayoutProps";
 
 export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon.ico",
-  },
-  title: "Khaera_blk",
+  title: "Khaera_blk - Accueil",
   description: "Portfolio of my projects",
 };
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <html lang="en">
-      <body className="dark:bg-stone-900">
-        <ThemeProvider enableSystem={true} attribute="class">
-          <NavBar />
-          {children}
-        </ThemeProvider>
+      <body
+        className="dark:bg-stone-900 container"
+        suppressHydrationWarning={true}
+      >
+        <RootLayout>{children}</RootLayout>
       </body>
     </html>
   );

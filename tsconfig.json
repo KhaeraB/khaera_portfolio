@@ -23,6 +23,16 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/heroSection",
+    "types.d.ts",
+    "public/service-worker.js"
+  ],
+  "types": ["node", "jest", "@testing-library/jest-dom"],
+  "exclude": ["node_modules"],
+  "typeRoots": ["./global.d.ts", "./node_modules/@types"]
 }
