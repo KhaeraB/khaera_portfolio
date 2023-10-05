@@ -37,29 +37,33 @@ const Menu = ({ navbar, setNavbar }: Props) => {
               );
             })}
 
-          {session.status === "authenticated" &&
-            DASHBOARD_LIST.map((item, id) => {
-              return (
-                <>
-                  <Link
-                    key={id}
-                    className={
-                      "block lg:inline-block text-neutral-900  hover:text-neutral-500 dark:text-neutral-100"
-                    }
-                    href={item.page}
-                    onClick={() => setNavbar(!navbar)}
-                  >
-                    {item.label}
-                  </Link>
-                </>
-              );
-            })}
-          <button
-            className="bg-slate-100 p-1.5 rounded-xl  dark:text-neutral-900"
-            onClick={() => signOut()}
-          >
-            Logout
-          </button>
+          {session.status === "authenticated" && (
+            <>
+              {DASHBOARD_LIST.map((item, id) => {
+                return (
+                  <>
+                    <Link
+                      key={id}
+                      className={
+                        "block lg:inline-block text-neutral-900  hover:text-neutral-500 dark:text-neutral-100"
+                      }
+                      href={item.page}
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      {item.label}
+                    </Link>
+                  </>
+                );
+              })}
+
+              <button
+                className="bg-slate-100 p-1.5 rounded-xl  dark:text-neutral-900"
+                onClick={() => signOut()}
+              >
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
