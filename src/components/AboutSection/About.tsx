@@ -1,4 +1,4 @@
-import datas from "@/utils/portefolio_text";
+import datas from "@/utils/data/portefolio_text";
 import React from "react";
 import Image from "next/image";
 
