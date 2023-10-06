@@ -7,6 +7,8 @@ export interface IWork extends Document {
   image: string;
   giturl: string;
   siteurl: string;
+  skills: string[];
+  mocks: string[];
 }
 
 const workSchema = new Schema<IWork>(
@@ -17,8 +19,10 @@ const workSchema = new Schema<IWork>(
     image: String,
     giturl: String,
     siteurl: String,
+    skills: Array,
+    mocks: Array,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 const Work = mongoose.models.Work || mongoose.model("Work", workSchema);
 

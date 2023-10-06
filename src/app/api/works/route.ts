@@ -30,3 +30,19 @@ export const GET = async (request: Request): Promise<NextResponse> => {
     return new NextResponse("Database Error", { status: 500 });
   }
 };
+export const POST = async (request: Request): Promise<NextResponse> => {
+  const body = await request.json();
+  const newProject = new Work(body);
+  //fetch
+  try {
+    await connect();
+    await newProject.save();
+    return new NextResponse("Project has been created", {
+      status: 201,
+    });
+  } catch (err: any) {
+    return new NextResponse(err.message, {
+      status: 500,
+    });
+  }
+};

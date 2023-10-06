@@ -21,7 +21,7 @@ export const MENU_LIST: Array<NavItems> = [
 export const DASHBOARD_LIST: Array<NavItems> = [
   {
     label: "Dashboard",
-    page: "/",
+    page: "/dashboard",
   },
   {
     label: "View Portfolio",

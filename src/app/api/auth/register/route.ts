@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest) => {
     email,
     password: hashedPassword,
   });
-  console.log(newAdmin);
+
   try {
     newAdmin.save();
     return new NextResponse("Admin has been created", {
