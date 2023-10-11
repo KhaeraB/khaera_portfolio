@@ -19,11 +19,20 @@ const workSchema = new Schema<IWork>(
     image: String,
     giturl: String,
     siteurl: String,
-    skills: Array,
-    mocks: Array,
+    skills: [
+      {
+        type: String,
+      },
+    ],
+    mocks: [
+      {
+        type: String,
+      },
+    ],
   },
   { timestamps: true },
 );
+
 const Work = mongoose.models.Work || mongoose.model("Work", workSchema);
 
 export default Work;

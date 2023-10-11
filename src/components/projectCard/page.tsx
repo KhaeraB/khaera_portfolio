@@ -42,7 +42,7 @@ const ProjectCard: React.FC<PropsCard> = ({
         <h5 className="font-bold text-xl mb-2">{title}</h5>
         <p>{description}</p>
       </div>
-      <div className="flex flex-wrap flex-row justify-center m-2 z-10 md:justify-center">
+      <div className="flex flex-wrap flex-row justify-center p-2 z-10 md:justify-center dark:bg-stone-800">
         {skills.map((item: string, idx: number) => {
           return (
             <p

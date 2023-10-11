@@ -1,69 +1,86 @@
-import { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 
 interface TagInputProps {
-  addTagToFormData: (tag: string) => void;
+  name: string;
+  tags: string[]; // Ajout de la propriété "tags"
+  onSave: (tags: string[]) => void;
 }
-const TagInput: React.FC<TagInputProps> = ({ addTagToFormData }) => {
-  const [tags, setTags] = useState<string[]>([]);
-  const [tagInput, setTagInput] = useState("");
 
-  const handleTagInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTagInput(e.target.value);
+const TagInput: React.FC<TagInputProps> = ({ name, onSave }) => {
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [inputFocus, setInputFocus] = useState(false);
+
+  const handleTagChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTag(e.target.value);
   };
 
-  const handleAddTag = () => {
-    if (tagInput.trim() !== "") {
-      const newTag = tagInput.trim();
-      addTagToFormData(newTag);
+  const handleTagAdd = () => {
+    if (tag.trim() !== "") {
+      let newTag = tag;
+      if (tag.length > 10) {
+        newTag = tag.slice(0, 10) + "...";
+      }
       setTags([...tags, newTag]);
-      setTagInput("");
-      console.log(TagInput);
+      setTag("");
     }
   };
 
-  const handleRemoveTag = (tag: string) => {
-    const updatedTags = tags.filter((t) => t !== tag);
-    setTags(updatedTags);
+  const handleTagRemove = (index: number) => {
+    const newTags = [...tags];
+    newTags.splice(index, 1);
+    setTags(newTags);
   };
 
   return (
-    <div>
-      <label htmlFor="tags" className="block text-sm font-light text-gray-400">
-        ajouter des skills
+    <div className="mb-4" key={name}>
+      <label className="block text-gray-600 dark:text-white text-sm font-medium m-2">
+        {name}
       </label>
-      <div className="flex flex-wrap">
-        {tags.map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium text-purple-800 bg-purple-100 rounded"
-          >
-            {tag}
-            <button
-              type="button"
-              className="ml-2 text-sm text-purple-400 bg-transparent rounded-sm hover:bg-purple-200 hover:text-purple-900"
-              onClick={() => handleRemoveTag(tag)}
-            >
-              X
-            </button>
-          </span>
-        ))}
-      </div>
-      <div className="flex">
+      <div className="flex items-center space-x-2 px-2">
         <input
           type="text"
-          id="tags"
-          name="tags"
-          value={tagInput}
-          onChange={handleTagInput}
-          className="border rounded-md px-3 py-2 w-full"
+          value={tag}
+          onChange={handleTagChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Enter some tags"
+          onFocus={() => setInputFocus(true)}
+          onBlur={() => setInputFocus(false)}
         />
         <button
-          type="button"
-          onClick={handleAddTag}
-          className="bg-indigo-500 text-white px-2 py-1 m-1 rounded-md"
+          onClick={handleTagAdd}
+          className="w-1/3 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
-          ajouter
+          Add Tag
         </button>
+      </div>
+      <div className="w-1/2 mx-2">
+        {tags.map((tag, index) => (
+          <div className="bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1">
+            <span
+              key={index}
+              className=" leading-relaxed flex flex-row justify-between items-center pl-2 truncate max-w-xs"
+              x-text="tag"
+            >
+              <span className="pr-2">{tag}</span>
+              <button
+                onClick={() => handleTagRemove(index)}
+                className="w-6 h-8 rounded-r-lg inline-block align-middle text-gray-500 hover:text-gray-600 bg-blue-200 focus:outline-none"
+              >
+                <svg
+                  className="w-6 h-6 fill-current mx-auto"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

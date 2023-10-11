@@ -21,6 +21,7 @@ const Menu = ({ navbar, setNavbar }: Props) => {
       >
         <div className="items-center justify-center space-y-8 md:flex md:space-x-4 md:space-y-0">
           <DarkModeToggle />
+
           {session.status === "unauthenticated" &&
             MENU_LIST.map((item, id) => {
               return (
@@ -41,18 +42,16 @@ const Menu = ({ navbar, setNavbar }: Props) => {
             <>
               {DASHBOARD_LIST.map((item, id) => {
                 return (
-                  <>
-                    <Link
-                      key={id}
-                      className={
-                        "block lg:inline-block text-neutral-900  hover:text-neutral-500 dark:text-neutral-100"
-                      }
-                      href={item.page}
-                      onClick={() => setNavbar(!navbar)}
-                    >
-                      {item.label}
-                    </Link>
-                  </>
+                  <Link
+                    key={id}
+                    className={
+                      "block lg:inline-block text-neutral-900  hover:text-neutral-500 dark:text-neutral-100"
+                    }
+                    href={item.page}
+                    onClick={() => setNavbar(!navbar)}
+                  >
+                    {item.label}
+                  </Link>
                 );
               })}
 

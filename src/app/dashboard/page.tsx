@@ -2,23 +2,38 @@
 import { getData } from "@/utils/data/api";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import Modal from "@/components/modal/Modal";
 
+export interface FormDataProps {
+  title: string;
+  category: string;
+  desc: string;
+  image: string;
+  giturl: string;
+  siteurl: string;
+  skills: string[];
+  mocks: string[];
+}
+
 const Dashboard = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData: FormDataProps = {
     title: "",
     category: "",
     desc: "",
     image: "",
     giturl: "",
     siteurl: "",
-    skills: [""],
-  });
+    skills: [],
+    mocks: [],
+  };
+  const [formData, setFormData] = useState({ ...initialFormData });
+
   const session = useSession();
   const router = useRouter();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => {
@@ -37,6 +52,17 @@ const Dashboard = () => {
       [name]: value,
     });
   };
+
+  // const handleEdit = async (id: any) => {
+  //   try {
+  //     await fetch(`/api/works/${id}`, {
+  //       method: "UPDATE",
+  //     });
+  //     mutate();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const handleDelete = async (id: any) => {
     try {
       await fetch(`/api/works/${id}`, {
@@ -48,58 +74,93 @@ const Dashboard = () => {
     }
   };
 
-  const handleAddTagToFormData = (tagInput: string) => {
-    setFormData({
-      ...formData,
-      skills: [...formData.skills, tagInput],
+  const handleAddTagToFormData = (
+    tagInput: string,
+    isMock: boolean = false,
+  ) => {
+    setFormData((prevData) => {
+      if (isMock && tagInput.trim() !== "") {
+        return {
+          ...prevData,
+          mocks: [...prevData.mocks, tagInput],
+        };
+      } else {
+        return {
+          ...prevData,
+          skills: [...prevData.skills, tagInput],
+        };
+      }
     });
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleAddMocksToFormData = (tagInput: string) => {
+    handleAddTagToFormData(tagInput, true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const title = formData.get("title") as string;
+    const category = formData.get("category") as string;
+    const desc = formData.get("desc") as string;
+    const image = formData.get("image") as string;
+    const giturl = formData.get("giturl") as string;
+    const siteurl = formData.get("siteurl") as string;
+    // Récupérer les compétences et les maquettes
+    const skillsInput = formData.get("skills") as string;
+    const mocksInput = formData.get("mocks") as string;
+    // Vérification si les valeurs ne sont pas nulles
+    const skills = skillsInput
+      ? skillsInput.split(",").map((skill) => skill.trim())
+      : [];
+    const mocks = mocksInput
+      ? mocksInput.split(",").map((mock) => mock.trim())
+      : [];
+
     try {
-      const res = await fetch("/api/works", {
+      await fetch("/api/works", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ formData, username: session?.data?.user?.name }),
+        body: JSON.stringify({
+          title,
+          category,
+          desc,
+          image,
+          giturl,
+          siteurl,
+          skills,
+          mocks,
+          adminname: session.data?.user?.name,
+        }),
       });
-      console.log(formData);
-      if (res.status === 201) {
-        // Réussite, redirigez ou effectuez d'autres actions
-        router.push("/dashboard"); // Par exemple, redirigez vers le tableau de bord après la création réussie
-      } else {
-        const responseData = await res.json();
-        throw new Error(responseData.message);
-      }
-    } catch (err: any) {
+      mutate();
+
+      setFormData(initialFormData);
+      closeModal();
+    } catch (err) {
       console.error(err);
     }
+    console.log(formData);
   };
 
   if (error) {
     return <div>Error loading data</div>;
-  }
-
-  if (!data && isLoading) {
+  } else if (!data && isLoading) {
     return (
       <div className="cup">
         <div className="handle"></div>
       </div>
     );
-  }
-
-  if (session.status === "unauthenticated") {
+  } else if (session.status === "unauthenticated") {
     router?.push("/dashboard/login");
-  }
-  if (session.status === "authenticated") {
+  } else if (session.status === "authenticated") {
     return (
-      <section className="container">
+      <section className="container ">
         <div className="px-4">
           <div className="flex flex-row justify-between items-center">
             <div>
-              <h1 className="font-bold text-4xl md:text-6xl">
+              <h1 className="font-bold text-4xl md:text-6xl dark:text-white">
                 Tableau de bord
               </h1>
               <hr className="w-16 h-1 my-1 bg-teal-500 border-0 rounded"></hr>
@@ -171,12 +232,12 @@ const Dashboard = () => {
                     <tbody className="divide-y divide-gray-200">
                       {isLoading
                         ? "loading"
-                        : data.map((item: any) => {
+                        : data?.map((item: any) => {
                             return (
-                              <tr>
+                              <tr key={item._id}>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                                   <Image
-                                    className=" object-cover  bg-slate-300 "
+                                    className=" object-cover  bg-slate-300 w-auto h-auto"
                                     src={item.image}
                                     width={200}
                                     height={300}
@@ -184,16 +245,16 @@ const Dashboard = () => {
                                     priority
                                   />
                                 </td>
-                                <td className="px-6 py-4 text-sm font-semibold text-gray-800  whitespace-nowrap">
+                                <td className="px-6 py-4 text-sm font-semibold dark:text-white  whitespace-nowrap">
                                   {item.title}
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                                <td className="px-6 py-4 text-sm dark:text-white whitespace-nowrap">
                                   {item.category}
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                                <td className="px-6 py-4 text-sm dark:text-white whitespace-nowrap">
                                   {item.siteurl}
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                                <td className="px-6 py-4 text-sm dark:text-white whitespace-nowrap">
                                   {item.giturl}
                                 </td>
                                 <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
@@ -228,7 +289,8 @@ const Dashboard = () => {
             closeModal={closeModal}
             onFormSubmit={handleSubmit}
             onFormChange={handleChange}
-            onAddTagToFormData={handleAddTagToFormData}
+            onAddItemToFormData={handleAddTagToFormData}
+            onAddImageToForData={handleAddMocksToFormData}
           />
         )}
       </section>

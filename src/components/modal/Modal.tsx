@@ -1,19 +1,34 @@
-import React, { ChangeEvent, FormEvent } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import TagInput from "../TagInput/TagInput";
+import { IWork } from "@/models/Work";
+import { FormDataProps } from "@/app/dashboard/page";
 
 interface ModalProps {
   openModal: boolean;
   closeModal: () => void;
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onFormChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onAddTagToFormData: (tag: string) => void;
+  onAddItemToFormData: (item: string) => void;
+  onAddImageToForData: (image: string) => void;
 }
 const Modal: React.FC<ModalProps> = ({
   closeModal,
   onFormSubmit,
   onFormChange,
-  onAddTagToFormData,
+  onAddItemToFormData,
+  onAddImageToForData,
 }) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState<FormDataProps>({
+    title: "",
+    category: "",
+    desc: "",
+    image: "",
+    giturl: "",
+    siteurl: "",
+    skills: [],
+    mocks: [],
+  });
   return (
     <>
       <div
@@ -39,9 +54,9 @@ const Modal: React.FC<ModalProps> = ({
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>
@@ -51,7 +66,7 @@ const Modal: React.FC<ModalProps> = ({
               <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                 Ajouter un nouveau projet
               </h3>
-              <form className="space-y-6" onSubmit={onFormSubmit}>
+              <form className="space-y-6" ref={formRef} onSubmit={onFormSubmit}>
                 <div>
                   <label
                     htmlFor="title"
@@ -126,6 +141,21 @@ const Modal: React.FC<ModalProps> = ({
                 </div>
                 <div>
                   <label
+                    htmlFor="mocks"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Autres Images
+                  </label>
+                  <div className="min-w-[50%] border-2 border-gray-300 rounded-md mt-4">
+                    <TagInput
+                      name="mocks"
+                      tags={formData.mocks}
+                      onSave={(tags) => onAddImageToForData("mocks")}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
                     htmlFor="giturl"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
@@ -168,9 +198,14 @@ const Modal: React.FC<ModalProps> = ({
                     Skills
                   </label>
                   <div className="min-w-[50%] border-2 border-gray-300 rounded-md mt-4">
-                    <TagInput addTagToFormData={onAddTagToFormData} />
+                    <TagInput
+                      name="skills"
+                      tags={formData.skills}
+                      onSave={(tags) => onAddItemToFormData("skills")}
+                    />
                   </div>
                 </div>
+
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

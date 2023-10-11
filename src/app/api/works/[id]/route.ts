@@ -39,3 +39,25 @@ export const DELETE = async (
     return new NextResponse("Database Error", { status: 500 });
   }
 };
+
+export const UPDATE = async (
+  request: Request,
+  { params, body }: { params: { id: string }; body: IWork },
+): Promise<NextResponse> => {
+  const { id } = params;
+
+  try {
+    await connect();
+
+    const updatedWork = await Work.findByIdAndUpdate(id, body, { new: true });
+
+    if (!updatedWork) {
+      return new NextResponse("Project not found", { status: 404 });
+    }
+
+    return new NextResponse(JSON.stringify(updatedWork), { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return new NextResponse("Database Error", { status: 500 });
+  }
+};

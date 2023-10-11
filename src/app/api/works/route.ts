@@ -32,7 +32,9 @@ export const GET = async (request: Request): Promise<NextResponse> => {
 };
 export const POST = async (request: Request): Promise<NextResponse> => {
   const body = await request.json();
+  console.log(typeof body.skills);
   const newProject = new Work(body);
+
   //fetch
   try {
     await connect();

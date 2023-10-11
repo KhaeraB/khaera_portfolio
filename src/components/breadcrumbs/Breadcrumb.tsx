@@ -24,7 +24,7 @@ export const BreadcrumbContext = () => {
 
     pathArray = pathArray.filter((path) => path !== "");
 
-    const breadcrumbs = pathArray.map((path, index) => {
+    const newBreadcrumbs = pathArray.map((path, index) => {
       const href = "/" + pathArray.slice(0, index + 1).join("/");
       return {
         href,
@@ -32,6 +32,8 @@ export const BreadcrumbContext = () => {
         isCurrent: index === pathArray.length - 1,
       };
     });
+
+    setBreadcrumbs(newBreadcrumbs); // Réinitialise les miettes de pain à chaque rendu
 
     const fetchData = async () => {
       try {
@@ -43,7 +45,6 @@ export const BreadcrumbContext = () => {
     };
 
     fetchData();
-    setBreadcrumbs(breadcrumbs);
   }, [pathname]);
   return (
     <>
