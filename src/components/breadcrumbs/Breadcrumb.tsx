@@ -52,21 +52,18 @@ export const BreadcrumbContext = () => {
         <BreadcrumbItem isCurrent={home} href="/">
           Accueil
         </BreadcrumbItem>
-        {breadcrumbs.map((breadcrumb) => (
-          <BreadcrumbItem
-            key={breadcrumb.href}
-            href={breadcrumb.href}
-            isCurrent={breadcrumb.isCurrent}
-          >
-            {data.map((item) => {
-              if (item._id === breadcrumb.label) {
-                return item.title;
-              } else {
-                return breadcrumb.label;
-              }
-            })}
-          </BreadcrumbItem>
-        ))}
+        {breadcrumbs.map((breadcrumb) => {
+          const project = data.find((item) => item._id === breadcrumb.label);
+          return (
+            <BreadcrumbItem
+              key={breadcrumb.href}
+              href={breadcrumb.href}
+              isCurrent={breadcrumb.isCurrent}
+            >
+              {project ? project.title : breadcrumb.label}
+            </BreadcrumbItem>
+          );
+        })}
       </BreadcrumbsFragment>
     </>
   );
