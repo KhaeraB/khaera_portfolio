@@ -3,7 +3,7 @@ import React, { useState, ChangeEvent } from "react";
 interface TagInputProps {
   name: string;
   tags: string[]; // Ajout de la propriété "tags"
-  onSave: (tags: string[]) => void;
+  onSave: (tags: string[], name: string) => void;
 }
 
 const TagInput: React.FC<TagInputProps> = ({ name, onSave }) => {
@@ -11,18 +11,17 @@ const TagInput: React.FC<TagInputProps> = ({ name, onSave }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [inputFocus, setInputFocus] = useState(false);
 
-  const handleTagChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTag(e.target.value);
+  const handleTagChange = (newTags: string[]) => {
+    onSave(newTags, name);
   };
 
   const handleTagAdd = () => {
     if (tag.trim() !== "") {
       let newTag = tag;
-      if (tag.length > 10) {
-        newTag = tag.slice(0, 10) + "...";
-      }
+
       setTags([...tags, newTag]);
       setTag("");
+      handleTagChange([...tags, newTag]);
     }
   };
 
@@ -41,18 +40,18 @@ const TagInput: React.FC<TagInputProps> = ({ name, onSave }) => {
         <input
           type="text"
           value={tag}
-          onChange={handleTagChange}
+          onChange={(e) => setTag(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Enter some tags"
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
         />
-        <button
+        <span
           onClick={handleTagAdd}
           className="w-1/3 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Add Tag
-        </button>
+        </span>
       </div>
       <div className="w-1/2 mx-2">
         {tags.map((tag, index) => (

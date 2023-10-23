@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import TagInput from "../TagInput/TagInput";
-import { IWork } from "@/models/Work";
+// import { IWork } from "@/models/Work";
 import { FormDataProps } from "@/app/dashboard/page";
 
 interface ModalProps {
@@ -8,8 +8,8 @@ interface ModalProps {
   closeModal: () => void;
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onFormChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onAddItemToFormData: (item: string) => void;
-  onAddImageToForData: (image: string) => void;
+  onAddItemToFormData: (tags: string[], field: string) => void;
+  onAddImageToForData: (tags: string[], field: string) => void;
 }
 const Modal: React.FC<ModalProps> = ({
   closeModal,
@@ -150,7 +150,7 @@ const Modal: React.FC<ModalProps> = ({
                     <TagInput
                       name="mocks"
                       tags={formData.mocks}
-                      onSave={(tags) => onAddImageToForData("mocks")}
+                      onSave={(tags) => onAddImageToForData(tags, "mocks")}
                     />
                   </div>
                 </div>
@@ -201,7 +201,7 @@ const Modal: React.FC<ModalProps> = ({
                     <TagInput
                       name="skills"
                       tags={formData.skills}
-                      onSave={(tags) => onAddItemToFormData("skills")}
+                      onSave={(tags) => onAddItemToFormData(tags, "skills")}
                     />
                   </div>
                 </div>

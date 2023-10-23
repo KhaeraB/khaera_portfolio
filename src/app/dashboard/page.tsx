@@ -74,50 +74,32 @@ const Dashboard = () => {
     }
   };
 
-  const handleAddTagToFormData = (
-    tagInput: string,
-    isMock: boolean = false,
-  ) => {
-    setFormData((prevData) => {
-      if (isMock && tagInput.trim() !== "") {
-        return {
-          ...prevData,
-          mocks: [...prevData.mocks, tagInput],
-        };
-      } else {
-        return {
-          ...prevData,
-          skills: [...prevData.skills, tagInput],
-        };
-      }
-    });
+  const handleSkillsChange = (newSkills: string[]) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      skills: newSkills,
+    }));
   };
 
-  const handleAddMocksToFormData = (tagInput: string) => {
-    handleAddTagToFormData(tagInput, true);
+  const handleMocksChange = (newMocks: string[]) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      mocks: newMocks,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const title = formData.title;
+    const category = formData.category;
+    const desc = formData.desc;
+    const image = formData.image;
+    const giturl = formData.giturl;
+    const siteurl = formData.siteurl;
 
-    const title = formData.get("title") as string;
-    const category = formData.get("category") as string;
-    const desc = formData.get("desc") as string;
-    const image = formData.get("image") as string;
-    const giturl = formData.get("giturl") as string;
-    const siteurl = formData.get("siteurl") as string;
-    // Récupérer les compétences et les maquettes
-    const skillsInput = formData.get("skills") as string;
-    const mocksInput = formData.get("mocks") as string;
-    // Vérification si les valeurs ne sont pas nulles
-    const skills = skillsInput
-      ? skillsInput.split(",").map((skill) => skill.trim())
-      : [];
-    const mocks = mocksInput
-      ? mocksInput.split(",").map((mock) => mock.trim())
-      : [];
+    const skills = formData.skills;
+    const mocks = formData.mocks;
 
     try {
       await fetch("/api/works", {
@@ -141,7 +123,6 @@ const Dashboard = () => {
     } catch (err) {
       console.error(err);
     }
-    console.log(formData);
   };
 
   if (error) {
@@ -155,6 +136,7 @@ const Dashboard = () => {
   } else if (session.status === "unauthenticated") {
     router?.push("/dashboard/login");
   } else if (session.status === "authenticated") {
+    console.log(formData);
     return (
       <section className="container ">
         <div className="px-4">
@@ -237,7 +219,7 @@ const Dashboard = () => {
                               <tr key={item._id}>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                                   <Image
-                                    className=" object-cover  bg-slate-300 w-auto h-auto"
+                                    className=" object-cover  bg-slate-300  h-auto"
                                     src={item.image}
                                     width={200}
                                     height={300}
@@ -289,8 +271,8 @@ const Dashboard = () => {
             closeModal={closeModal}
             onFormSubmit={handleSubmit}
             onFormChange={handleChange}
-            onAddItemToFormData={handleAddTagToFormData}
-            onAddImageToForData={handleAddMocksToFormData}
+            onAddItemToFormData={handleSkillsChange}
+            onAddImageToForData={handleMocksChange}
           />
         )}
       </section>

@@ -40,7 +40,7 @@ const ProjectCard: React.FC<PropsCard> = ({
       </div>
       <div className="px-6 py-4 dark:bg-stone-800">
         <h5 className="font-bold text-xl mb-2">{title}</h5>
-        <p>{description}</p>
+        <p>{description.slice(0, 40) + "..."}</p>
       </div>
       <div className="flex flex-wrap flex-row justify-center p-2 z-10 md:justify-center dark:bg-stone-800">
         {skills.map((item: string, idx: number) => {

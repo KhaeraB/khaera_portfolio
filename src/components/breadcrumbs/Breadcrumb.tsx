@@ -61,8 +61,9 @@ export const BreadcrumbContext = () => {
             {data.map((item) => {
               if (item._id === breadcrumb.label) {
                 return item.title;
+              } else {
+                return breadcrumb.label;
               }
-              return breadcrumb.label;
             })}
           </BreadcrumbItem>
         ))}
