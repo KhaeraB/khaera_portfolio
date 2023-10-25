@@ -4,7 +4,7 @@ import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { Link as Arrow } from "react-scroll";
 import { HiArrowDown } from "react-icons/hi";
-import datas from "../../utils/portefolio_text";
+import datas from "../../utils/data/portefolio_text";
 import Link from "next/link";
 import { icons_style } from "@/utils/icons";
 

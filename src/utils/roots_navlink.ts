@@ -17,3 +17,14 @@ export const MENU_LIST: Array<NavItems> = [
     page: "/contact",
   },
 ];
+
+export const DASHBOARD_LIST: Array<NavItems> = [
+  {
+    label: "Dashboard",
+    page: "/dashboard",
+  },
+  {
+    label: "View Portfolio",
+    page: "/portfolio",
+  },
+];

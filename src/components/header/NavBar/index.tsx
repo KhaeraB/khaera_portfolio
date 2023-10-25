@@ -9,7 +9,7 @@ const initialState = { isOpen: false };
 
 const navbarReducer = (
   state: { isOpen: boolean },
-  action: { type: string }
+  action: { type: string },
 ) => {
   switch (action.type) {
     case "TOGGLE_NAVBAR":

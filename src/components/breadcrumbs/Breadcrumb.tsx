@@ -24,7 +24,7 @@ export const BreadcrumbContext = () => {
 
     pathArray = pathArray.filter((path) => path !== "");
 
-    const breadcrumbs = pathArray.map((path, index) => {
+    const newBreadcrumbs = pathArray.map((path, index) => {
       const href = "/" + pathArray.slice(0, index + 1).join("/");
       return {
         href,
@@ -32,6 +32,8 @@ export const BreadcrumbContext = () => {
         isCurrent: index === pathArray.length - 1,
       };
     });
+
+    setBreadcrumbs(newBreadcrumbs); // Réinitialise les miettes de pain à chaque rendu
 
     const fetchData = async () => {
       try {
@@ -43,7 +45,6 @@ export const BreadcrumbContext = () => {
     };
 
     fetchData();
-    setBreadcrumbs(breadcrumbs);
   }, [pathname]);
   return (
     <>
@@ -51,20 +52,19 @@ export const BreadcrumbContext = () => {
         <BreadcrumbItem isCurrent={home} href="/">
           Accueil
         </BreadcrumbItem>
-        {breadcrumbs.map((breadcrumb) => (
-          <BreadcrumbItem
-            key={breadcrumb.href}
-            href={breadcrumb.href}
-            isCurrent={breadcrumb.isCurrent}
-          >
-            {data.map((item) => {
-              if (item._id === breadcrumb.label) {
-                return item.title;
-              }
-              return breadcrumb.label;
-            })}
-          </BreadcrumbItem>
-        ))}
+        {breadcrumbs.map((breadcrumb) => {
+          const project = data.find((item) => item._id === breadcrumb.label);
+          const label = project ? project.title : breadcrumb.label;
+          return (
+            <BreadcrumbItem
+              key={breadcrumb.href}
+              href={breadcrumb.href}
+              isCurrent={breadcrumb.isCurrent}
+            >
+              {label}
+            </BreadcrumbItem>
+          );
+        })}
       </BreadcrumbsFragment>
     </>
   );

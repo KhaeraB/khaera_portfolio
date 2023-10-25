@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import RootLayout from "../components/rootLayout/RootLayout";
 import { LayoutProps } from "@/types/LayoutProps";
+import { Head } from "next/document";
 
 export const metadata: Metadata = {
   title: "Khaera_blk - Accueil",
@@ -9,9 +10,9 @@ export const metadata: Metadata = {
 };
 export default function Layout({ children }: LayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className="dark:bg-stone-900 container"
+        className="dark:bg-stone-900 container "
         suppressHydrationWarning={true}
       >
         <RootLayout>{children}</RootLayout>

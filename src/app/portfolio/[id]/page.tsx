@@ -23,8 +23,8 @@ const ProjectPage = async ({ params }: { params: IWork }) => {
 
   const data = await getDataId(params.id);
   return (
-    <div className="flex flex-col px-5 mt-8 justify-center md:space-x-4 md:text-left ">
-      <div className="my-5 flex flex-col dark:bg-stone-800" key={data.id}>
+    <div className="flex flex-col px-5 mt-8 justify-center md:space-x-4 md:text-left">
+      <div className="my-5 flex flex-col dark:bg-stone-900" key={data.id}>
         <div className="w-full">
           <Image
             className="w-full h-72 object-cover bg-top bg-slate-300 "
@@ -37,7 +37,7 @@ const ProjectPage = async ({ params }: { params: IWork }) => {
         </div>
         <div className="w-full py-2 flex flex-col md:flex-row justify-center items-center ">
           <div className="w-full flex-col md:w-1/2 justify-center items-center">
-            <h2 className="text-4xl">{data.title}</h2>
+            <h2 className="text-4xl my-4">{data.title}</h2>
             <p>{data.desc}</p>
             <div className="text-center md:w-1/2 md:text-left">
               <h3 className="text-2xl font-bold mb-1">Compétences</h3>
@@ -52,6 +52,14 @@ const ProjectPage = async ({ params }: { params: IWork }) => {
                     </p>
                   );
                 })}
+              </div>
+              <div className="text-center flex flex-row items-center">
+                <span className="w-12 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 m-2">
+                  <Link href={data.giturl} className="text-center">
+                    <FiGithub size={20} className="text-center" />
+                  </Link>
+                </span>
+                <ButtonProjet url={data.siteurl} text="Site" />
               </div>
             </div>
           </div>
@@ -70,14 +78,6 @@ const ProjectPage = async ({ params }: { params: IWork }) => {
                   />
                 );
               })}
-            </div>
-            <div className="text-center flex flex-col items-center justify-center ">
-              <span className="w-12 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                <Link href={data.giturl} className="text-center">
-                  <FiGithub size={20} className="text-center" />
-                </Link>
-              </span>
-              <ButtonProjet url={data.siteurl} text="Site" />
             </div>
           </div>
         </div>

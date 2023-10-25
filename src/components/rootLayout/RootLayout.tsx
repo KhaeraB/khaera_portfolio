@@ -5,18 +5,18 @@ import Footer from "@/components/footer/Footer";
 import "../../styles/global.css";
 import { BreadcrumbContext } from "@/components/breadcrumbs/Breadcrumb";
 import NavBar from "@/components/header/NavBar";
-import AuthProvider from "../AuthProvider/AuthProvider";
+import AuthProvider from "../../providers/AuthProvider";
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <ThemeProvider enableSystem={true} attribute="class">
-      <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider enableSystem={true} attribute="class">
         <NavBar />
         <BreadcrumbContext />
         {children}
         <Footer />
-      </AuthProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 };
 
