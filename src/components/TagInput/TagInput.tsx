@@ -4,6 +4,7 @@ interface TagInputProps {
   name: string;
   tags: string[]; // Ajout de la propriété "tags"
   onSave: (tags: string[], name: string) => void;
+  onEdit: Object;
 }
 
 const TagInput: React.FC<TagInputProps> = ({ name, onSave }) => {

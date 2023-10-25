@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
-import Modal from "@/components/modal/Modal";
+import ModalAdd from "@/components/modal/ModalAdd";
+import ModalEdit from "@/components/modal/ModalEdit";
 
 export interface FormDataProps {
   title: string;
@@ -34,10 +35,15 @@ const Dashboard = () => {
   const session = useSession();
   const router = useRouter();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedProjectData, setSelectedProjectData] = useState(null);
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsAddModalOpen(false);
+  };
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
   };
 
   const { data, mutate, error, isLoading } = useSWR(
@@ -53,16 +59,40 @@ const Dashboard = () => {
     });
   };
 
-  // const handleEdit = async (id: any) => {
-  //   try {
-  //     await fetch(`/api/works/${id}`, {
-  //       method: "UPDATE",
-  //     });
-  //     mutate();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const handleEdit = async (id: any) => {
+    const title = formData.title;
+    const category = formData.category;
+    const desc = formData.desc;
+    const image = formData.image;
+    const giturl = formData.giturl;
+    const siteurl = formData.siteurl;
+
+    const skills = formData.skills;
+    const mocks = formData.mocks;
+    try {
+      await fetch(`/api/works/${id}`, {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          category,
+          desc,
+          image,
+          giturl,
+          siteurl,
+          skills,
+          mocks,
+          adminname: session.data?.user?.name,
+        }),
+      });
+      mutate();
+
+      setSelectedProjectData(id);
+      setIsEditModalOpen(true);
+      closeModal();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const handleDelete = async (id: any) => {
     try {
       await fetch(`/api/works/${id}`, {
@@ -74,14 +104,28 @@ const Dashboard = () => {
     }
   };
 
-  const handleSkillsChange = (newSkills: string[]) => {
+  const handleSkillsAdd = (newSkills: string[]) => {
     setFormData((prevData) => ({
       ...prevData,
       skills: newSkills,
     }));
   };
 
-  const handleMocksChange = (newMocks: string[]) => {
+  const handleMocksAdd = (newMocks: string[]) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      mocks: newMocks,
+    }));
+  };
+
+  const handleSkillsEdit = (newSkills: string[]) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      skills: newSkills,
+    }));
+  };
+
+  const handleMocksEdit = (newMocks: string[]) => {
     setFormData((prevData) => ({
       ...prevData,
       mocks: newMocks,
@@ -136,7 +180,6 @@ const Dashboard = () => {
   } else if (session.status === "unauthenticated") {
     router?.push("/dashboard/login");
   } else if (session.status === "authenticated") {
-    console.log(formData);
     return (
       <section className="container ">
         <div className="px-4">
@@ -150,12 +193,12 @@ const Dashboard = () => {
             <div>
               <button
                 type="button"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => setIsAddModalOpen(true)}
                 data-modal-target="authentication-modal"
                 data-modal-toggle="authentication-modal"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-300  hover:text-black "
               >
-                add project
+                Ajouter un projet
               </button>
             </div>
           </div>
@@ -200,14 +243,20 @@ const Dashboard = () => {
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                         >
-                          Edit
+                          Voir
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                        >
+                          Editer
                         </th>
                         <th
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                           onClick={handleDelete}
                         >
-                          Delete
+                          Supprimer
                         </th>
                       </tr>
                     </thead>
@@ -241,10 +290,20 @@ const Dashboard = () => {
                                 </td>
                                 <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                   <a
-                                    className="text-green-500 hover:text-green-700"
-                                    href="#"
+                                    className="text-blue-500 hover:text-blue-700"
+                                    href={`/portfolio/${encodeURIComponent(
+                                      item._id,
+                                    )}`}
                                   >
-                                    Edit
+                                    Voir
+                                  </a>
+                                </td>
+                                <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                  <a
+                                    className="text-green-500 hover:text-green-700"
+                                    onClick={() => handleEdit(item._id)} // Appel de la fonction handleEdit avec l'ID du projet
+                                  >
+                                    Editer
                                   </a>
                                 </td>
                                 <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
@@ -252,7 +311,7 @@ const Dashboard = () => {
                                     className="text-red-500 hover:text-red-700"
                                     onClick={() => handleDelete(item._id)}
                                   >
-                                    Delete
+                                    Supprimer
                                   </button>
                                 </td>
                               </tr>
@@ -265,14 +324,27 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {isModalOpen && (
-          <Modal
-            openModal={isModalOpen}
+        {isAddModalOpen && (
+          <ModalAdd
+            openModal={isAddModalOpen}
             closeModal={closeModal}
             onFormSubmit={handleSubmit}
             onFormChange={handleChange}
-            onAddItemToFormData={handleSkillsChange}
-            onAddImageToForData={handleMocksChange}
+            onAddItemToFormData={handleSkillsAdd}
+            onAddImageToForData={handleMocksAdd}
+          />
+        )}
+        {isEditModalOpen && (
+          <ModalEdit
+            openModal={isEditModalOpen}
+            closeModal={closeEditModal}
+            onFormSubmit={handleSubmit}
+            onFormChange={handleChange}
+            onEditItemToFormData={handleSkillsEdit}
+            onEditImageToForData={handleMocksEdit}
+            onAddItemToFormData={handleSkillsEdit}
+            onAddImageToForData={handleMocksEdit}
+            editedProjectData={formData}
           />
         )}
       </section>

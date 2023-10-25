@@ -11,7 +11,7 @@ interface ModalProps {
   onAddItemToFormData: (tags: string[], field: string) => void;
   onAddImageToForData: (tags: string[], field: string) => void;
 }
-const Modal: React.FC<ModalProps> = ({
+const ModalAdd: React.FC<ModalProps> = ({
   closeModal,
   onFormSubmit,
   onFormChange,
@@ -19,7 +19,7 @@ const Modal: React.FC<ModalProps> = ({
   onAddImageToForData,
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
-  const [formData, setFormData] = useState<FormDataProps>({
+  const [formData] = useState<FormDataProps>({
     title: "",
     category: "",
     desc: "",
@@ -150,6 +150,7 @@ const Modal: React.FC<ModalProps> = ({
                     <TagInput
                       name="mocks"
                       tags={formData.mocks}
+                      onEdit={(tags) => onAddImageToForData(tags, "mocks")}
                       onSave={(tags) => onAddImageToForData(tags, "mocks")}
                     />
                   </div>
@@ -201,6 +202,7 @@ const Modal: React.FC<ModalProps> = ({
                     <TagInput
                       name="skills"
                       tags={formData.skills}
+                      onEdit={(tags) => onAddItemToFormData(tags, "skills")}
                       onSave={(tags) => onAddItemToFormData(tags, "skills")}
                     />
                   </div>
@@ -221,4 +223,4 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default ModalAdd;

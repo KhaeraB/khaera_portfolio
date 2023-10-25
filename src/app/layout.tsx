@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="dark:bg-stone-900 container"
+        className="dark:bg-stone-900 container "
         suppressHydrationWarning={true}
       >
         <RootLayout>{children}</RootLayout>
